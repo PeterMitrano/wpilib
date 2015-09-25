@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+mainClassName = 'edu.wpi.first.wpilibj.test.AntJunitLanucher'
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.1'
+    }
+}
+
+dependencies {
+    compile project(':wpilibj').sourceSets.shared.output
+    compile project(':wpilibj').sourceSets.athena.output
+    runtime project(':wpilibj').sourceSets.shared.output
+    runtime project(':wpilibj').sourceSets.athena.output
+    compile "edu.wpi.first.wpilib.networktables.java:NetworkTables:3.0.0-SNAPSHOT:arm${getClassifier()}"
+    runtime "edu.wpi.first.wpilib.networktables.java:NetworkTables:3.0.0-SNAPSHOT:arm${getClassifier()}"
+    compile 'junit:junit:4.11'
+    compile 'com.googlecode.junit-toolbox:junit-toolbox:2.0'
+    compile 'org.apache.ant:ant:1.9.4'
+    compile 'org.apache.ant:ant-junit:1.9.4'
+}
